@@ -66,9 +66,3 @@ fi
 
 alias config="git --git-dir=$HOME/.cfg.git/ --work-tree=$HOME"
 
-if [[ -n "`ls -1qA ./.cfg.git/ | grep -q .`" ]]; then
-    echo "dotfile repo absent"
-else
-    echo "dotfile repo present"
-fi
-
