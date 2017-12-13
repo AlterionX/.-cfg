@@ -1,0 +1,13 @@
+.cfg.git
+.cache
+.local
+.gnome
+.pki
+.config/chromium
+.Xauthority
+.bash_history
+.config/pulse/
+.esd_auth
+.histfile
+.zcompdump
+.zsh_history
