@@ -68,3 +68,5 @@ else
 fi
 
 alias config="git --git-dir=$HOME/.cfg --work-tree=$HOME"
+alias ls="ls --color=always"
+
