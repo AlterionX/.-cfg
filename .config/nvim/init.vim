@@ -115,6 +115,15 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 endif
 
 filetype off
+function! BuildYCM(info)
+  " info is a dictionary with 3 fields
+  " - name:   name of the plugin
+  " - status: 'installed', 'updated', or 'unchanged'
+  " - force:  set on PlugInstall! or PlugUpdate!
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --rust-completer --go-completer --clang-completer --ts-completer --java-completer
+  endif
+endfunction
 call plug#begin('~/.local/share/nvim/plugged')
     " Color schemes
     Plug 'joshdick/onedark.vim' " onedark
@@ -123,7 +132,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Code stuff
     Plug 'sheerun/vim-polyglot'
     Plug 'w0rp/ale'
-    Plug 'Valloric/YouCompleteMe'
+    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
     " status line
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'

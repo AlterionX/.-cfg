@@ -13,6 +13,9 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+autoload -Uz promptinit
+promptinit
+
 # key bindings
 typeset -g -A key
 
@@ -59,10 +62,9 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 if [[ $TERM != "linux" ]]; then
     powerline-daemon -q
-    . /usr/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
+    . /usr/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 else
-    PROMPT="hardyharhar"
+    PROMPT="hardyharharyernotinaguiharhar >"
 fi
 
-alias config="git --git-dir=$HOME/.cfg.git/ --work-tree=$HOME"
-
+alias config="git --git-dir=$HOME/.cfg --work-tree=$HOME"

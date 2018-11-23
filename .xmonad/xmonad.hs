@@ -12,7 +12,7 @@ import XMonad.Hooks.ManageDocks
 main = do
     xmonad $ def
         { terminal = "xfce4-terminal"
-          , modMask = mod4Mask
+        , modMask = mod4Mask
 --          , layoutHook = layouts
 --          , logHook = dynamicLogWithPP dzenPP
         }
