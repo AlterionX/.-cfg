@@ -64,9 +64,11 @@ if [[ $TERM != "linux" ]]; then
     powerline-daemon -q
     . /usr/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 else
-    PROMPT="hardyharharyernotinaguiharhar >"
+    PROMPT="hardyharharyernotinaguiharhar > "
 fi
 
 alias config="git --git-dir=$HOME/.cfg --work-tree=$HOME"
 alias ls="ls --color=always"
+
+export _JAVA_AWT_WM_NONREPARENTING=1
 

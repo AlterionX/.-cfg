@@ -56,10 +56,6 @@ nnoremap <leader>sv :w<cr>:source $MYVIMRC<cr>
 " better splits
 set splitbelow
 set splitright
-nnoremap <c-b>\| :vsp<cr>
-nnoremap <c-b>- :sp<cr>
-nnoremap <c-b>q :wq<cr>
-nnoremap <c-b>Q :q!<cr>
 
 " better window nav
 nnoremap <c-s-w> <nop>
@@ -71,15 +67,15 @@ nnoremap <c-l> <c-W><c-l>
 
 " tab navigation
 nnoremap <m-h> :tabprev<cr>
-nnoremap <m-j> :tabfirst<cr>
-nnoremap <m-k> :tablast<cr>
+nnoremap <m-j> :tablast<cr>
+nnoremap <m-k> :tabfirst<cr>
 nnoremap <m-l> :tabnext<cr>
 nnoremap <m-t> :tabnew<cr>
 nnoremap <m-q> :tabclose<cr>
 nnoremap <expr> <m-e> "\<esc>:tabedit " . input("file ", "", "file") . "\<cr>"
 inoremap <m-h> <esc>:tabprev<cr>
-inoremap <m-j> <esc>:tabfirst<cr>
-inoremap <m-k> <esc>:tablast<cr>
+inoremap <m-j> <esc>:tablast<cr>
+inoremap <m-k> <esc>:tabfirst<cr>
 inoremap <m-l> <esc>:tabnext<cr>
 inoremap <m-t> <esc>:tabnew<cr>
 inoremap <m-q> <esc>:tabclose<cr>
@@ -96,11 +92,17 @@ set title
 " go to previous: word level
 nnoremap E ge
 
+" folds!
+nnoremap <Space> za
+nnoremap <leader>ref :set foldmethod=syntax<cr>
+set foldmethod=syntax
+
+
 " single line comments
 augroup comments
     autocmd!
     autocmd FileType python noremap <buffer> <C-c> I#<esc>
-    autocmd FileType vim noremap <buffer> <C-c> I#<esc>
+    autocmd FileType vim noremap <buffer> <C-c> I"<esc>
     autocmd FileType javascript, java noremap <buffer> <C-c> I//<esc>
 augroup END
 
@@ -136,14 +138,27 @@ call plug#begin('~/.local/share/nvim/plugged')
     " status line
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 set background=dark
 colorscheme iceberg
 
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
 let g:airline#extenstions#tabline#enabled = 1
 let g:airline#extenstions#tabline#left_sep = ' '
 let g:airline#extenstions#tabline#left_alt_sep = '|'
 
-echo ">^.^< Welcome back >^.^<"
+let g:ale_completion_enabled = 0
+let g:ale_c_build_dir_names = ['build']
+
+":silent PlugUpgrade
+":silent PlugUpdate
+
+" single line comments
+augroup vim_greeting
+    autocmd!
+    autocmd VimEnter * echo ">^.^< Welcome back >^.^<"
+augroup END
 

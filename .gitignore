@@ -1,4 +1,5 @@
 .cfg.git
+.cfg
 .cache
 .local
 .gnome
@@ -11,3 +12,10 @@
 .histfile
 .zcompdump
 .zsh_history
+.IntelliJ*
+.android
+.cargo
+.aur
+.bash_logout
+
+
