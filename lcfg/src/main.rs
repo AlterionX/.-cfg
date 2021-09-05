@@ -4,7 +4,7 @@
 
 use std::os::unix::fs::symlink;
 use std::collections::HashSet;
-use std::path::{PathBuf, Path};
+use std::path::PathBuf;
 
 fn main() {
     let src_dir = {
@@ -83,10 +83,10 @@ fn main() {
     };
 
     let entries_to_del = {
-        let ff_iter = match src_dir.read_dir() {
+        let ff_iter = match dst_dir.read_dir() {
             Ok(ff) => ff,
             Err(e) => {
-                println!("Attempting to iterate over the contents of {:?} has failed due to {:?}.", src_dir, e);
+                println!("Attempting to iterate over the contents of {:?} has failed due to {:?}.", dst_dir, e);
                 return;
             },
         };
