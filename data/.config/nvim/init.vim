@@ -128,13 +128,11 @@ function! BuildYCM(info)
 endfunction
 call plug#begin('~/.local/share/nvim/plugged')
     " Color schemes
-    Plug 'joshdick/onedark.vim' " onedark
-    Plug 'badacadabra/vim-archery' " archery
     Plug 'cocopon/iceberg.vim' " iceberg
     " Code stuff
     Plug 'sheerun/vim-polyglot'
     Plug 'w0rp/ale'
-    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+    Plug 'Valloric/YouCompleteMe' ", { 'do': function('BuildYCM') }
     " status line
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -161,4 +159,3 @@ augroup vim_greeting
     autocmd!
     autocmd VimEnter * echo ">^.^< Welcome back >^.^<"
 augroup END
-
