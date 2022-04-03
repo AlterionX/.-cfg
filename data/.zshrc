@@ -205,8 +205,7 @@ fi
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-export ALGORAND_DATA="/mnt/d/algorand/algod/data"
-export PATH="/mnt/d/algorand/algod:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 # This is technically only for WSL2
 export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0
@@ -218,3 +217,6 @@ fi
 
 alias ls="ls --color=always"
 alias picompile="cargo build --release --target arm-unknown-linux-gnueabihf"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform

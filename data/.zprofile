@@ -2,5 +2,4 @@
 #    exec startx
 #fi
 
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$PATH:$HOME/.local/share/bin"
