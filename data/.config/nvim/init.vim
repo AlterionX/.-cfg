@@ -1,7 +1,7 @@
 " disable vi + per file vim
 set nocompatible
 set modelines=0
-set hidden history=1000 undolevels=1000 
+set hidden history=1000 undolevels=1000
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
 " backspace
@@ -30,9 +30,6 @@ set nowrap " don't wrap lines past edge
 
 " mapping starts
 let g:mapleader="\\"
-
-inoremap <c-n> <nop>
-inoremap <c-space> <c-n>
 
 noremap <up> <nop>
 noremap <down> <nop>
@@ -81,6 +78,13 @@ inoremap <m-t> <esc>:tabnew<cr>
 inoremap <m-q> <esc>:tabclose<cr>
 inoremap <expr> <m-e> "\<esc>:tabedit " . input("file ", "", "file") . "\<cr>"
 
+" better autocomplete
+function! s:check_was_whitespace() abort
+  return !(col('.') - 1) || getline('.')[col('.') - 2]  =~# '\s'
+endfunction
+inoremap <silent><expr><tab> (!pumvisible() && <sid>check_was_whitespace()) ? "\<tab>" : "\<c-n>"
+inoremap <silent><expr><s-tab> (!pumvisible() && <sid>check_was_whitespace()) ? "\<tab>" : "\<c-p>"
+
 " search highlight removal
 nnoremap <silent> <esc> :nohl<cr>
 
@@ -106,6 +110,24 @@ augroup comments
     autocmd FileType javascript, java noremap <buffer> <C-c> I//<esc>
 augroup END
 
+" Plugin variables
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+let g:ale_sign_column_always = 1
+let g:ale_c_build_dir_names = ['build']
+let g:ale_lint_delay = 100
+let g:ale_fix_on_save = 1
+
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
+let g:ale_linters = {'rust': ['analyzer']}
+
+set completeopt=menu,menuone,preview,noselect,noinsert
+
 " Entry plugin stuff
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
     silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
@@ -117,22 +139,12 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 endif
 
 filetype off
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --rust-completer --go-completer --clang-completer --ts-completer --java-completer
-  endif
-endfunction
 call plug#begin('~/.local/share/nvim/plugged')
     " Color schemes
     Plug 'cocopon/iceberg.vim' " iceberg
     " Code stuff
     Plug 'sheerun/vim-polyglot'
-    Plug 'w0rp/ale'
-    Plug 'Valloric/YouCompleteMe' ", { 'do': function('BuildYCM') }
+    Plug 'dense-analysis/ale'
     " status line
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -141,15 +153,6 @@ call plug#end()
 
 set background=dark
 colorscheme iceberg
-
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
-let g:airline#extenstions#tabline#enabled = 1
-let g:airline#extenstions#tabline#left_sep = ' '
-let g:airline#extenstions#tabline#left_alt_sep = '|'
-
-let g:ale_completion_enabled = 0
-let g:ale_c_build_dir_names = ['build']
 
 ":silent PlugUpgrade
 ":silent PlugUpdate
