@@ -1,5 +1,4 @@
 local progress_tracker = require("fidget")
-local rust = require("rust-tools")
 local cmp = require("cmp")
 
 progress_tracker.setup({})
@@ -39,18 +38,6 @@ function attempt_completion(action)
         end)
     end
 end
-
--- Languages
-rust.setup({
-    server = {
-        on_attach = function(_, bufnr)
-            -- hover
-            -- vim.keymap.set("n", "<c-space>", rt.hover_actions, {buffer = bufnr})
-            -- code action
-            -- vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group, {buffer = bufnr})
-        end,
-    },
-})
 
 --
 vim.opt.completeopt = {'menu', 'menuone', 'noselect', 'noinsert'}
